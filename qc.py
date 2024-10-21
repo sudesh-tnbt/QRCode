@@ -1,5 +1,9 @@
 import qrcode as qr
 
+def filename(url):
+    elements = url.split("/")
+    return elements[len(elements) - 1] + ".png"
+
 isValid = True
 prompt = None
 while isValid:
@@ -7,7 +11,8 @@ while isValid:
     if prompt[0:8] == "https://":
         isValid = False
     else:
-        print("URL should start with https://\n")
+        print("URL should start with https://")
 
 img = qr.make(prompt)
-img.save(prompt[9:] + ".png")
+filename = filename(prompt)
+img.save(filename)
